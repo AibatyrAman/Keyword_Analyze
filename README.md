@@ -8,43 +8,41 @@ Bu araç, App Store optimizasyonu için anahtar kelime analizi ve başlık/alt b
 - Keyword, Volume ve Difficulty metriklerini analiz etme
 - Branded kelimeleri otomatik tespit ve filtreleme
 - Ülkeye özgü çoğul ekleri kaldırma
-- GPT-4 destekli Title ve Subtitle önerileri
+- **Gemini 2.0 Flash** destekli Title ve Subtitle önerileri
 - Anahtar kelime eşleştirme ve analiz
 - Drag & Drop CSV dosya desteği
 - İlerleme çubuğu ile işlem takibi
 - Otomatik tamamlamalı ülke seçimi
+- **App Ideas Generator** - AI destekli uygulama fikirleri üretimi
 
 ## Gereksinimler
 
 ```bash
 python 3.x
-tkinter
-tkinterdnd2
+flet
 pandas
-openai
-python-dotenv
+google-generativeai
+openpyxl
+numpy
+httpx
 ```
 
 ## Kurulum
 
 1. Gerekli Python paketlerini yükleyin:
 ```bash
-pip install pandas openai tkinterdnd2 python-dotenv
+pip install -r requirements.txt
 ```
 
-2. OpenAI API anahtarınızı ayarlayın:
-   - Projenin kök dizininde `.env` dosyası oluşturun
-   - İçine API anahtarınızı şu formatta ekleyin:
-   ```
-   OPENAI_API_KEY=your-api-key-here
-   ```
-   - `.env` dosyasını asla GitHub'a push etmeyin!
+2. **Gemini API anahtarınızı ayarlayın:**
+   - `aso_generate_flet.py` dosyasında `GEMINI_API_KEY` değişkenini güncelleyin
+   - Veya kendi API anahtarınızı almak için: https://makersuite.google.com/app/apikey
 
 ## Kullanım
 
 1. Uygulamayı başlatın:
 ```bash
-python aso_genarate.py
+python aso_generate_flet.py
 ```
 
 2. CSV dosyalarınızı sürükleyip bırakın veya klasör seçin
@@ -60,8 +58,10 @@ python aso_genarate.py
    - Branded Kelimelerden Ayrıştırılmış Tablo
    - Eklerinden Ayrılmış Kelime Frekans Tablosu
    - Title Subtitle Tablosu
+   - **🏆 Top 20 İdeal Keywords**
+   - **💡 App Ideas Generator**
 
-6. Sonuçları CSV olarak dışa aktarın
+6. Sonuçları Excel olarak dışa aktarın
 
 ## CSV Dosya Formatı
 
@@ -69,6 +69,9 @@ Girdi CSV dosyalarınız aşağıdaki sütunları içermelidir:
 - Keyword
 - Volume
 - Difficulty
+- Growth (Max Reach)
+- Max. Reach
+- No. of results
 
 ## Özellik Detayları
 
@@ -78,32 +81,28 @@ Girdi CSV dosyalarınız aşağıdaki sütunları içermelidir:
 - Çoğul ekleri kaldırır
 
 ### Title ve Subtitle Önerileri
-- GPT-4 ile optimize edilmiş başlık önerileri
-- Seçilen ülkeye özgü dil desteği
-- Karakter limiti kontrolü (30 karakter)
-- Anahtar kelime kullanım optimizasyonu
+- **Gemini 2.0 Flash** ile optimize edilmiş başlık önerileri
+- Ülkeye özgü optimizasyon
+- Karakter sınırlarına uygun öneriler
 
-### Eşleşen Kelimeler Analizi
-- Title ve Subtitle'da kullanılan kelimelerin analizi
-- Volume ve Difficulty metriklerinin ortalaması
-- Kullanılmayan anahtar kelimelerin listesi
+### Top 20 İdeal Keywords
+- Düşük Difficulty + Yüksek Volume/Growth/MaxReach kombinasyonu
+- Ağırlıklı skor hesaplama sistemi
+- En ideal keywords'leri otomatik tespit
 
-## Hata Ayıklama
+### App Ideas Generator
+- **Gemini 2.0 Flash** ile AI destekli uygulama fikirleri
+- Kategori ve keyword bazlı stratejik analiz
+- Content Type, Target Audience, Monetization Model önerileri
 
-Uygulama, `app.log` dosyasına detaylı log kayıtları tutar. Hata durumunda bu dosyayı kontrol edin.
+## API Kullanımı
 
-## Katkıda Bulunma
-
-1. Bu depoyu fork edin
-2. Yeni bir branch oluşturun (`git checkout -b feature/yeniOzellik`)
-3. Değişikliklerinizi commit edin (`git commit -am 'Yeni özellik eklendi'`)
-4. Branch'inizi push edin (`git push origin feature/yeniOzellik`)
-5. Pull Request oluşturun
+Bu uygulama **Google Gemini 2.0 Flash** API'sini kullanır:
+- Branded kelime tespiti
+- Çoğul ek kaldırma
+- Title/Subtitle önerileri
+- App Ideas üretimi
 
 ## Lisans
 
-Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için `LICENSE` dosyasına bakın.
-
-## İletişim
-
-Sorularınız için issue açabilir veya pull request gönderebilirsiniz. 
+Bu proje MIT lisansı altında lisanslanmıştır. 
